@@ -19,6 +19,7 @@
 - 堆
   - 最大堆
   - 最小堆
+- 并查集
 - LRU Cache
 
 ## Already implemented algorithms

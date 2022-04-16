@@ -158,6 +158,7 @@
     <ClCompile Include="单链表链式存储.cpp" />
     <ClCompile Include="双向链表链式存储.cpp" />
     <ClCompile Include="堆.cpp" />
+    <ClCompile Include="并查集.cpp" />
     <ClCompile Include="拉链法哈希表.cpp" />
     <ClCompile Include="栈链式存储.cpp" />
     <ClCompile Include="线性探测哈希表.cpp" />
