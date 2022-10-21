@@ -43,8 +43,8 @@ void swap(int a[],int low,int high) {
 }
 
 int main(int argc, char *argv[]) {
-	int a[] = {5,2,3,1};
-	QSort(a, 4);
+	int a[] = { 3, 7, 2, 1, 5, 4, 6 };
+	QSort(a, 7);
 	for (auto&i : a) {
 		cout << i << endl;
 	}
