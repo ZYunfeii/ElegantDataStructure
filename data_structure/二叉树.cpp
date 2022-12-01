@@ -1,87 +1,87 @@
-//#include <iostream>
-//#include <vector>
-//#include <queue>
-//using namespace std;
-//
-//typedef struct node
-//{
-//	struct node *lchild;
-//	struct node *rchild;
-//	char data;
-//}BiTreeNode, *BiTree;
-//
-//class Tree {
-//private:
-//	BiTree tree;
-//public:
-//	void create() {
-//		BiTree T = new BiTreeNode;
-//		this->tree = createBiTree(T);
-//	}
-//	BiTree createBiTree(BiTree& T) { // ×¢ÒâÊ¹ÓÃµÄÊÇÖ¸ÕëµÄÒýÓÃ Èç¹ûÖ»ÊÇ´«ÈëÖ¸Õë»á±»¿½±´
-//		char c;
-//		cin >> c;
-//		if ('#' == c)
-//			T = NULL;
-//		else
-//		{
-//			cout << "´´½¨Ò»¸ö½Úµã!" << endl;
-//			T = new BiTreeNode;
-//			T->data = c;
-//			createBiTree(T->lchild);
-//			createBiTree(T->rchild);
-//		}
-//		return T;
-//	}
-//	void preOrderTraverse() {  // ÏÈÐò±éÀú
-//		recurDfsPre(tree);
-//	}
-//	void recurDfsPre(BiTree& tree) {
-//		if (tree == nullptr) return;
-//		cout << tree->data << endl;
-//		recurDfsPre(tree->lchild);
-//		recurDfsPre(tree->rchild);
-//	}
-//
-//	void inOrderTraverse() {    // ÖÐÐò±éÀú
-//		recurDfsIn(tree);
-//	}
-//	void recurDfsIn(BiTree& tree) {
-//		if (tree == nullptr) return;
-//		recurDfsIn(tree->lchild);
-//		cout << tree->data << endl;
-//		recurDfsIn(tree->rchild);
-//	}
-//
-//	void postOrderTraverse() {   // ºóÐò±éÀú
-//		recurDfsPost(tree);
-//	}
-//	void recurDfsPost(BiTree& tree) {
-//		if (tree == nullptr) return;
-//		recurDfsPost(tree->lchild);
-//		recurDfsPost(tree->rchild);
-//		cout << tree->data << endl;
-//	}
-//
-//	void levelTraverse() { // ²ãÐò±éÀú
-//		queue<BiTree> q;
-//		q.push(tree);
-//		while (!q.empty()) {
-//			for (int i = 0; i < q.size(); ++i) {
-//				BiTree tmp = q.front();
-//				q.pop();
-//				cout << tmp->data << endl;
-//				if(tmp->lchild) q.push(tmp->lchild);
-//				if(tmp->rchild) q.push(tmp->rchild);
-//			}
-//		}
-//	}
-//};
-//
-//int main() {
-//	Tree t;
-//	t.create();
-//	t.preOrderTraverse();
-//	t.levelTraverse();
-//	return 0;
-//}
+#include <iostream>
+#include <vector>
+#include <queue>
+using namespace std;
+
+typedef struct node
+{
+	struct node *lchild;
+	struct node *rchild;
+	char data;
+}BiTreeNode, *BiTree;
+
+class Tree {
+private:
+	BiTree tree;
+public:
+	void create() {
+		BiTree T = new BiTreeNode;
+		this->tree = createBiTree(T);
+	}
+	BiTree createBiTree(BiTree& T) { // ×¢ï¿½ï¿½Ê¹ï¿½Ãµï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ö»ï¿½Ç´ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½á±»ï¿½ï¿½ï¿½ï¿½
+		char c;
+		cin >> c;
+		if ('#' == c)
+			T = NULL;
+		else
+		{
+			cout << "ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Úµï¿½!" << endl;
+			T = new BiTreeNode;
+			T->data = c;
+			createBiTree(T->lchild);
+			createBiTree(T->rchild);
+		}
+		return T;
+	}
+	void preOrderTraverse() {  // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		recurDfsPre(tree);
+	}
+	void recurDfsPre(BiTree& tree) {
+		if (tree == nullptr) return;
+		cout << tree->data << endl;
+		recurDfsPre(tree->lchild);
+		recurDfsPre(tree->rchild);
+	}
+
+	void inOrderTraverse() {    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		recurDfsIn(tree);
+	}
+	void recurDfsIn(BiTree& tree) {
+		if (tree == nullptr) return;
+		recurDfsIn(tree->lchild);
+		cout << tree->data << endl;
+		recurDfsIn(tree->rchild);
+	}
+
+	void postOrderTraverse() {   // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		recurDfsPost(tree);
+	}
+	void recurDfsPost(BiTree& tree) {
+		if (tree == nullptr) return;
+		recurDfsPost(tree->lchild);
+		recurDfsPost(tree->rchild);
+		cout << tree->data << endl;
+	}
+
+	void levelTraverse() { // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		queue<BiTree> q;
+		q.push(tree);
+		while (!q.empty()) {
+			for (int i = 0; i < q.size(); ++i) {
+				BiTree tmp = q.front();
+				q.pop();
+				cout << tmp->data << endl;
+				if(tmp->lchild) q.push(tmp->lchild);
+				if(tmp->rchild) q.push(tmp->rchild);
+			}
+		}
+	}
+};
+
+int main() {
+	Tree t;
+	t.create();
+	t.preOrderTraverse();
+	t.levelTraverse();
+	return 0;
+}

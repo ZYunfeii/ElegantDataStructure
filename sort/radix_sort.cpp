@@ -7,7 +7,7 @@ using namespace std;
 int get(int val, int pos) {
     for (int i = 0; i < pos - 1; ++i) {
         val /= 10;
-    }
+    }                                                             
     return val % 10;
 }
 

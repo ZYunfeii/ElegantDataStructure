@@ -1,126 +1,126 @@
-//#include <iostream>
-//#include <vector>
-//#include <assert.h>
-//using namespace std;
-// 
-//// ¶ÑÊÇ¾ßÓÐÏÂÁÐÐÔÖÊµÄÍêÈ«¶þ²æÊ÷£ºÃ¿¸ö½áµãµÄÖµ¶¼´óÓÚ»òµÈÓÚÆä×óÓÒº¢×Ó½áµãµÄÖµ£¬³ÆÎª´ó¶¥¶Ñ£»
-//// Ã¿¸ö½áµãµÄÖµ¶¼Ð¡ÓÚ»òµÈÓÚÆä×óÓÒº¢×Ó½áµãµÄÖµ£¬³ÆÎªÐ¡¶¥¶Ñ
-//// ¹¹½¨¶Ñ¸´ÔÓ¶ÈO(n) ÖØ½¨¶Ñ¸´ÔÓ¶ÈO(nlogn)
-//
-//// ×î´ó¶Ñ
-//template<class T>
-//class MaxHeap {
-//private: 
-//	vector<T> data;
-//	int pos;       // ¼ÇÂ¼¶ÑµÄÖÕÖ¹Ë÷Òý µ±Ã»ÓÐeraseÔªËØÊ± pos == data.size() - 1
-//public:
-//	MaxHeap(vector<T> src):data(src), pos(src.size() - 1) {
-//		for (int i = data.size() / 2; i >= 0; --i) {
-//			heapAdjust(i, data.size() - 1);
-//		}
-//	}
-//	void heapAdjust(int s, int m) {
-//		if (s == 0 && m == 0) return;               // ÓÐÐ©ÊéÓÃ1×÷Îªroot£¬Èç¹ûÓÃ0µÄ»°Òª¿¼ÂÇÕâÖÖÇé¿ö£¬·ñÔòÔÚforÖÐ»áÒ»Ö±Ñ­»·ÍË²»³öÀ´
-//		int temp, j;
-//		temp = data[s];
-//		for (j = s; j <= m; j *= 2) {                // ¶ÔÓÚÍêÈ«¶þ²æÊ÷£¬Ò»¸ö½ÚµãiµÄ×ó½ÚµãºÍÓÒ½ÚµãÎª2iºÍ2i+1
-//			if (j < m && data[j] < data[j + 1]) ++j; // ÕÒµ½×óÓÒº¢×ÓÖÐÖµ´óµÄË÷Òý j < mÊÇ±£Ö¤j+1ÓÐ¶¨Òå
-//			if (temp > data[j]) break;               // ÓÉÓÚ×ÓÊ÷ÒÑ¾­ÊÇ´ó¶¥¶ÑÁË£¬Èç¹ûtemp»¹´óÓÚ×óÓÒº¢×ÓµÄ×î´óÖµ£¬ÄÇÃ´²»ÓÃ½øÐÐÖ®ºóµÄ±éÀúÁË
-//			data[s] = data[j];
-//			s = j;                                   // ×¼±¸±éÀú´óµÄ½ÚµãµÄº¢×Ó½Úµã
-//		}
-//		data[s] = temp;                              // ×îºó½«Ò»¿ªÊ¼µÄ½Úµã²åÈëµ½¡°ºÏÊÊ¡±µÄÎ»ÖÃ
-//	}
-//	T getMaxEle() {
-//		if (!data.empty()) return data[0];
-//	}
-//	T eraseTopAdjust() {                              // ·µ»Ø¸ù½ÚµãºóÉ¾³ý²¢ÖØÐÂµ÷Õû¶Ñ
-//		assert(!data.empty());
-//		T top = data[0];
-//		swap(data[0], data[pos]);
-//		pos--;
-//		heapAdjust(0, pos);
-//		return top;
-//	}
-//	void addEle(T val) {                        // ¼ÓÈë½Úµãµ½¶Ñ ¼ÓÔÚÊ÷µÄÄ©Î²
-//		if (pos < data.size() - 1) {
-//			data[pos + 1] = val;
-//			pos++;
-//		}
-//		else {
-//			data.push_back(val);
-//			pos = data.size() - 1;
-//		}
-//		for (int i = pos / 2; i >= 0; --i) {  // ÖØÐÂµ÷Õû¶Ñ
-//			heapAdjust(i, pos);
-//		}
-//	}
-//};
-//
-//// ×îÐ¡¶Ñ
-//template<class T>
-//class MinHeap {
-//private:
-//	vector<T> data;
-//	int pos;       // ¼ÇÂ¼¶ÑµÄÖÕÖ¹Ë÷Òý µ±Ã»ÓÐeraseÔªËØÊ± pos == data.size() - 1
-//
-//public:
-//	MinHeap(vector<T> src):data(src), pos(src.size() - 1) {
-//		for (int i = data.size() / 2; i >= 0; --i) {
-//			heapAdjust(i, data.size() - 1);
-//		}
-//	}
-//	void heapAdjust(int s, int m) {
-//		if (s == 0 && m == 0) return;
-//		int temp, j;
-//		temp = data[s];
-//		for (j = s; j <= m; j *= 2) {                // ¶ÔÓÚÍêÈ«¶þ²æÊ÷£¬Ò»¸ö½ÚµãiµÄ×ó½ÚµãºÍÓÒ½ÚµãÎª2iºÍ2i+1
-//			if (j < m && data[j] > data[j + 1]) ++j; // ÕÒµ½×óÓÒº¢×ÓÖÐÖµÐ¡µÄË÷Òý j < mÊÇ±£Ö¤j+1ÓÐ¶¨Òå
-//			if (temp < data[j]) break;               // ÓÉÓÚ×ÓÊ÷ÒÑ¾­ÊÇÐ¡¶¥¶ÑÁË£¬Èç¹ûtemp»¹Ð¡ÓÚ×óÓÒº¢×ÓµÄ×î´óÖµ£¬ÄÇÃ´²»ÓÃ½øÐÐÖ®ºóµÄ±éÀúÁË
-//			data[s] = data[j];
-//			s = j;                                   // ×¼±¸±éÀúÐ¡µÄ½ÚµãµÄº¢×Ó½Úµã
-//		}
-//		data[s] = temp;                              // ×îºó½«Ò»¿ªÊ¼µÄ½Úµã²åÈëµ½¡°ºÏÊÊ¡±µÄÎ»ÖÃ
-//	}
-//	T getMinEle() {
-//		if (!data.empty()) return data[0];
-//	}
-//	T eraseTopAdjust() {
-//		assert(!data.empty());
-//		T top = data[0];
-//		swap(data[0], data[pos]);
-//		pos--;
-//		heapAdjust(0, pos);
-//		return top;
-//	}
-//	void addEle(T val) {
-//		if (pos < data.size() - 1) {
-//			data[pos + 1] = val;
-//			pos++;
-//		}
-//		else {
-//			data.push_back(val);
-//			pos = data.size() - 1;
-//		}
-//		for (int i = pos / 2; i >= 0; --i) {
-//			heapAdjust(i, pos);
-//		}
-//	}
-//};
-//
-//int main() {
-//	MaxHeap<int> myMaxHeap({ 3,2,5,1,7 });
-//	cout << myMaxHeap.eraseTopAdjust() << endl;
-//	cout << myMaxHeap.eraseTopAdjust() << endl;
-//	cout << myMaxHeap.eraseTopAdjust() << endl;
-//	myMaxHeap.addEle(9);
-//	cout << myMaxHeap.eraseTopAdjust() << endl;
-//	cout << myMaxHeap.eraseTopAdjust() << endl;
-//	cout << myMaxHeap.eraseTopAdjust() << endl;
-//	myMaxHeap.addEle(10);
-//	cout << myMaxHeap.eraseTopAdjust() << endl;
-//
-//	//MinHeap<int> myMinHeap({ 3,2,5,1,7 });
-//	//cout << myMinHeap.getMinEle() << endl;
-//	return 0;
-//}
+#include <iostream>
+#include <vector>
+#include <assert.h>
+using namespace std;
+
+// ï¿½ï¿½ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½ï¿½È«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½ï¿½Ú»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òºï¿½ï¿½Ó½ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½Îªï¿½ó¶¥¶Ñ£ï¿½
+// Ã¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½Ð¡ï¿½Ú»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òºï¿½ï¿½Ó½ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½ÎªÐ¡ï¿½ï¿½ï¿½ï¿½
+// ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¸ï¿½ï¿½Ó¶ï¿½O(n) ï¿½Ø½ï¿½ï¿½Ñ¸ï¿½ï¿½Ó¶ï¿½O(nlogn)
+
+// ï¿½ï¿½ï¿½ï¿½
+template<class T>
+class MaxHeap {
+private: 
+	vector<T> data;
+	int pos;       // ï¿½ï¿½Â¼ï¿½Ñµï¿½ï¿½ï¿½Ö¹ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã»ï¿½ï¿½eraseÔªï¿½ï¿½Ê± pos == data.size() - 1
+public:
+	MaxHeap(vector<T> src):data(src), pos(src.size() - 1) {
+		for (int i = data.size() / 2; i >= 0; --i) {
+			heapAdjust(i, data.size() - 1);
+		}
+	}
+	void heapAdjust(int s, int m) {
+		if (s == 0 && m == 0) return;               // ï¿½ï¿½Ð©ï¿½ï¿½ï¿½ï¿½1ï¿½ï¿½Îªrootï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½0ï¿½Ä»ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½forï¿½Ð»ï¿½Ò»Ö±Ñ­ï¿½ï¿½ï¿½Ë²ï¿½ï¿½ï¿½ï¿½ï¿½
+		int temp, j;
+		temp = data[s];
+		for (j = s; j <= m; j *= 2) {                // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Úµï¿½iï¿½ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½Ò½Úµï¿½Îª2iï¿½ï¿½2i+1
+			if (j < m && data[j] < data[j + 1]) ++j; // ï¿½Òµï¿½ï¿½ï¿½ï¿½Òºï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ j < mï¿½Ç±ï¿½Ö¤j+1ï¿½Ð¶ï¿½ï¿½ï¿½
+			if (temp > data[j]) break;               // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¾ï¿½ï¿½Ç´ó¶¥¶ï¿½ï¿½Ë£ï¿½ï¿½ï¿½ï¿½tempï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òºï¿½ï¿½Óµï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½Ã´ï¿½ï¿½ï¿½Ã½ï¿½ï¿½ï¿½Ö®ï¿½ï¿½Ä±ï¿½ï¿½ï¿½ï¿½ï¿½
+			data[s] = data[j];
+			s = j;                                   // ×¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä½Úµï¿½Äºï¿½ï¿½Ó½Úµï¿½
+		}
+		data[s] = temp;                              // ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Ê¼ï¿½Ä½Úµï¿½ï¿½ï¿½ëµ½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¡ï¿½ï¿½ï¿½Î»ï¿½ï¿½
+	}
+	T getMaxEle() {
+		if (!data.empty()) return data[0];
+	}
+	T eraseTopAdjust() {                              // ï¿½ï¿½ï¿½Ø¸ï¿½ï¿½Úµï¿½ï¿½É¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Âµï¿½ï¿½ï¿½ï¿½ï¿½
+		assert(!data.empty());
+		T top = data[0];
+		swap(data[0], data[pos]);
+		pos--;
+		heapAdjust(0, pos);
+		return top;
+	}
+	void addEle(T val) {                        // ï¿½ï¿½ï¿½ï¿½Úµãµ½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä©Î²
+		if (pos < data.size() - 1) {
+			data[pos + 1] = val;
+			pos++;
+		}
+		else {
+			data.push_back(val);
+			pos = data.size() - 1;
+		}
+		for (int i = pos / 2; i >= 0; --i) {  // ï¿½ï¿½ï¿½Âµï¿½ï¿½ï¿½ï¿½ï¿½
+			heapAdjust(i, pos);
+		}
+	}
+};
+
+// ï¿½ï¿½Ð¡ï¿½ï¿½
+template<class T>
+class MinHeap {
+private:
+	vector<T> data;
+	int pos;       // ï¿½ï¿½Â¼ï¿½Ñµï¿½ï¿½ï¿½Ö¹ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã»ï¿½ï¿½eraseÔªï¿½ï¿½Ê± pos == data.size() - 1
+
+public:
+	MinHeap(vector<T> src):data(src), pos(src.size() - 1) {
+		for (int i = data.size() / 2; i >= 0; --i) {
+			heapAdjust(i, data.size() - 1);
+		}
+	}
+	void heapAdjust(int s, int m) {
+		if (s == 0 && m == 0) return;
+		int temp, j;
+		temp = data[s];
+		for (j = s; j <= m; j *= 2) {                // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Úµï¿½iï¿½ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½Ò½Úµï¿½Îª2iï¿½ï¿½2i+1
+			if (j < m && data[j] > data[j + 1]) ++j; // ï¿½Òµï¿½ï¿½ï¿½ï¿½Òºï¿½ï¿½ï¿½ï¿½ï¿½ÖµÐ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ j < mï¿½Ç±ï¿½Ö¤j+1ï¿½Ð¶ï¿½ï¿½ï¿½
+			if (temp < data[j]) break;               // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¾ï¿½ï¿½ï¿½Ð¡ï¿½ï¿½ï¿½ï¿½ï¿½Ë£ï¿½ï¿½ï¿½ï¿½tempï¿½ï¿½Ð¡ï¿½ï¿½ï¿½ï¿½ï¿½Òºï¿½ï¿½Óµï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½Ã´ï¿½ï¿½ï¿½Ã½ï¿½ï¿½ï¿½Ö®ï¿½ï¿½Ä±ï¿½ï¿½ï¿½ï¿½ï¿½
+			data[s] = data[j];
+			s = j;                                   // ×¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¡ï¿½Ä½Úµï¿½Äºï¿½ï¿½Ó½Úµï¿½
+		}
+		data[s] = temp;                              // ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Ê¼ï¿½Ä½Úµï¿½ï¿½ï¿½ëµ½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¡ï¿½ï¿½ï¿½Î»ï¿½ï¿½
+	}
+	T getMinEle() {
+		if (!data.empty()) return data[0];
+	}
+	T eraseTopAdjust() {
+		assert(!data.empty());
+		T top = data[0];
+		swap(data[0], data[pos]);
+		pos--;
+		heapAdjust(0, pos);
+		return top;
+	}
+	void addEle(T val) {
+		if (pos < data.size() - 1) {
+			data[pos + 1] = val;
+			pos++;
+		}
+		else {
+			data.push_back(val);
+			pos = data.size() - 1;
+		}
+		for (int i = pos / 2; i >= 0; --i) {
+			heapAdjust(i, pos);
+		}
+	}
+};
+
+int main() {
+	MaxHeap<int> myMaxHeap({ 3,2,5,1,7 });
+	cout << myMaxHeap.eraseTopAdjust() << endl;
+	cout << myMaxHeap.eraseTopAdjust() << endl;
+	cout << myMaxHeap.eraseTopAdjust() << endl;
+	myMaxHeap.addEle(9);
+	cout << myMaxHeap.eraseTopAdjust() << endl;
+	cout << myMaxHeap.eraseTopAdjust() << endl;
+	cout << myMaxHeap.eraseTopAdjust() << endl;
+	myMaxHeap.addEle(10);
+	cout << myMaxHeap.eraseTopAdjust() << endl;
+
+	//MinHeap<int> myMinHeap({ 3,2,5,1,7 });
+	//cout << myMinHeap.getMinEle() << endl;
+	return 0;
+}

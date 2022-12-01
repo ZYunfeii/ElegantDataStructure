@@ -1,172 +1,172 @@
-//#include <iostream>
-//#include <vector>
-//#include <queue>
-//using namespace std;
-//
-//// ¶þ²æËÑË÷Ê÷ÊµÏÖ
-//typedef struct node
-//{
-//	struct node *lchild;
-//	struct node *rchild;
-//	int data;
-//	node(int src) :data(src) {
-//		lchild = nullptr;
-//		rchild = nullptr;
-//	}
-//}BiTreeNode, *BiTree;
-//
-//class BST {
-//private:
-//	BiTree tree;
-//public:
-//
-//	BST() {
-//		tree = nullptr;
-//	}
-//
-//	// BST ²åÈë²Ù×÷
-//	void insert(BiTreeNode node) {
-//		insertRecur(node, tree);
-//	}
-//
-//	void insertRecur(BiTreeNode node, BiTree& root) {
-//		if (root == nullptr){
-//			root = new BiTreeNode(node.data); // ²»ÄÜÓÃroot = &node, node´«½øÀ´ÊÇ¸öÁÙÊ±±äÁ¿ 
-//			return;
-//		}
-//
-//		if (node.data < root->data) {
-//			insertRecur(node, root->lchild);
-//		}
-//		else {
-//			insertRecur(node, root->rchild);
-//		}
-//
-//	}
-//
-//	// É¾³ý²Ù×÷Ïê¼û¡¶´ó»°Êý¾Ý½á¹¹¡·p352
-//	void erase(int key) {
-//		if (deleteBST(tree, key)) {
-//			cout << "É¾³ý³É¹¦!" << endl;
-//		}
-//		else {
-//			cout << "É¾³ýÊ§°Ü!" << endl;
-//		}
-//	}
-//
-//	bool deleteBST(BiTree& root, int key) {
-//		// ÏÈÐòDFSÕÒµ½ÒªÉ¾³ýµÄ½Úµã
-//		if (root == nullptr) return false;
-//		else {
-//			if (key == root->data) return deleteNode(root); 
-//			else if (key < root->data) return deleteBST(root->lchild, key);
-//			else return deleteBST(root->rchild, key);
-//		}
-//	}
-//
-//	bool deleteNode(BiTree& root) {
-//		BiTree tmp;
-//		if (root->rchild == nullptr) { // Ã»ÓÐÓÒ×ÓÊ÷µÄÇé¿öÖ±½Ó°Ñ×ó×ÓÊ÷½ÓÉÏÀ´
-//			tmp = root;
-//			root = root->lchild;
-//			delete tmp;
-//		}
-//		else if (root->lchild == nullptr) { // Ã»ÓÐ×ó×ÓÊ÷µÄÇé¿öÖ±½Ó°ÑÓÒ×ÓÊ÷½ÓÉÏÀ´
-//			tmp = root;
-//			root = root->rchild;
-//			delete tmp;
-//		}
-//		else {                         // ¼ÈÓÐ×ó×ÓÊ÷ÓÖÓÐÓÒ×ÓÊ÷
-//			BiTree q = root;
-//			BiTree s = root->lchild;
-//			// ÕÒ×ó×ÓÊ÷µÄ×îÓÒ½Úµãs£¬ÒòÎªÕâ¸ö½ÚµãÒ»¶¨ÊÇ×ó×ÓÊ÷ÖÐ×î´óµÄ½ÚµãÍ¬Ê±Ò»¶¨±ÈÓÒ×ÓÊ÷µÄËùÓÐ½ÚµãÖµÐ¡£¬ÓÃËüÀ´´úÌæ´ýÉ¾³ý½Úµã
-//			// qÊÇsµÄÇ°Çý½Úµã
-//			while (s->rchild) { 
-//				q = s;
-//				s = s->rchild;
-//			}
-//			root->data = s->data;
-//			if (q != root) {
-//				q->rchild = s->lchild;
-//			}
-//			else {
-//				q->lchild = s->lchild;  // q == rootµÄÇé¿öÊÇ´ýÉ¾³ý½ÚµãµÄ×óº¢×Ó½ÚµãÃ»ÓÐÓÒ×ÓÊ÷£¬´ËÊ±Ö±½Ó°Ñ×óº¢×Ó½ÚµãµÄ×ó×ÓÊ÷½ÓÉÏÀ´
-//			}
-//			delete s;
-//		}
-//		return true;
-//	}
-//
-//	// BST²éÕÒ²Ù×÷O(logn)
-//	BiTree search(int key) {
-//		BiTree res = searchDfs(tree, key);
-//		if (res == nullptr) {
-//			cout << "Ã»ÓÐ¶ÔÓ¦½Úµã!" << endl;
-//			return nullptr;
-//		}
-//		else return res;
-//	}
-//
-//	BiTree searchDfs(BiTree& root, int key) {
-//		if (root == nullptr) return nullptr;
-//		if (key < root->data) return searchDfs(root->lchild, key);
-//		else if(key > root->data) return searchDfs(root->rchild, key);
-//		else return root;
-//	}
-//	
-//	void preOrderTraverse() {  // ÏÈÐò±éÀú
-//		recurDfsPre(tree);
-//	}
-//	void recurDfsPre(BiTree& tree) {
-//		if (tree == nullptr) return;
-//		cout << tree->data << endl;
-//		recurDfsPre(tree->lchild);
-//		recurDfsPre(tree->rchild);
-//	}
-//
-//	void inOrderTraverse() {    // ÖÐÐò±éÀú
-//		recurDfsIn(tree);
-//	}
-//	void recurDfsIn(BiTree& tree) {
-//		if (tree == nullptr) return;
-//		recurDfsIn(tree->lchild);
-//		cout << tree->data << endl;
-//		recurDfsIn(tree->rchild);
-//	}
-//
-//	void postOrderTraverse() {   // ºóÐò±éÀú
-//		recurDfsPost(tree);
-//	}
-//	void recurDfsPost(BiTree& tree) {
-//		if (tree == nullptr) return;
-//		recurDfsPost(tree->lchild);
-//		recurDfsPost(tree->rchild);
-//		cout << tree->data << endl;
-//	}
-//
-//	void levelTraverse() { // ²ãÐò±éÀú
-//		queue<BiTree> q;
-//		q.push(tree);
-//		while (!q.empty()) {
-//			for (int i = 0; i < q.size(); ++i) {
-//				BiTree tmp = q.front();
-//				q.pop();
-//				cout << tmp->data << endl;
-//				if (tmp->lchild) q.push(tmp->lchild);
-//				if (tmp->rchild) q.push(tmp->rchild);
-//			}
-//		}
-//	}
-//};
-//
-//int main() {
-//	BST t;
-//	t.insert(BiTreeNode(3));
-//	t.insert(BiTreeNode(2));
-//	t.insert(BiTreeNode(5));
-//	t.insert(BiTreeNode(1));
-//	t.erase(3);
-//	t.levelTraverse();
-//	cout << t.search(5)->data << endl;
-//	return 0;
-//}
+#include <iostream>
+#include <vector>
+#include <queue>
+using namespace std;
+
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½
+typedef struct node
+{
+	struct node *lchild;
+	struct node *rchild;
+	int data;
+	node(int src) :data(src) {
+		lchild = nullptr;
+		rchild = nullptr;
+	}
+}BiTreeNode, *BiTree;
+
+class BST {
+private:
+	BiTree tree;
+public:
+
+	BST() {
+		tree = nullptr;
+	}
+
+	// BST ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	void insert(BiTreeNode node) {
+		insertRecur(node, tree);
+	}
+
+	void insertRecur(BiTreeNode node, BiTree& root) {
+		if (root == nullptr){
+			root = new BiTreeNode(node.data); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½root = &node, nodeï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç¸ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ 
+			return;
+		}
+
+		if (node.data < root->data) {
+			insertRecur(node, root->lchild);
+		}
+		else {
+			insertRecur(node, root->rchild);
+		}
+
+	}
+
+	// É¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý½á¹¹ï¿½ï¿½p352
+	void erase(int key) {
+		if (deleteBST(tree, key)) {
+			cout << "É¾ï¿½ï¿½ï¿½É¹ï¿½!" << endl;
+		}
+		else {
+			cout << "É¾ï¿½ï¿½Ê§ï¿½ï¿½!" << endl;
+		}
+	}
+
+	bool deleteBST(BiTree& root, int key) {
+		// ï¿½ï¿½ï¿½ï¿½DFSï¿½Òµï¿½ÒªÉ¾ï¿½ï¿½ï¿½Ä½Úµï¿½
+		if (root == nullptr) return false;
+		else {
+			if (key == root->data) return deleteNode(root); 
+			else if (key < root->data) return deleteBST(root->lchild, key);
+			else return deleteBST(root->rchild, key);
+		}
+	}
+
+	bool deleteNode(BiTree& root) {
+		BiTree tmp;
+		if (root->rchild == nullptr) { // Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½Ó°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+			tmp = root;
+			root = root->lchild;
+			delete tmp;
+		}
+		else if (root->lchild == nullptr) { // Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½Ó°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+			tmp = root;
+			root = root->rchild;
+			delete tmp;
+		}
+		else {                         // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+			BiTree q = root;
+			BiTree s = root->lchild;
+			// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò½Úµï¿½sï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½Úµï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä½Úµï¿½Í¬Ê±Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð½Úµï¿½ÖµÐ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¾ï¿½ï¿½ï¿½Úµï¿½
+			// qï¿½ï¿½sï¿½ï¿½Ç°ï¿½ï¿½ï¿½Úµï¿½
+			while (s->rchild) { 
+				q = s;
+				s = s->rchild;
+			}
+			root->data = s->data;
+			if (q != root) {
+				q->rchild = s->lchild;
+			}
+			else {
+				q->lchild = s->lchild;  // q == rootï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç´ï¿½É¾ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½Ó½Úµï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±Ö±ï¿½Ó°ï¿½ï¿½ï¿½ï¿½Ó½Úµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+			}
+			delete s;
+		}
+		return true;
+	}
+
+	// BSTï¿½ï¿½ï¿½Ò²ï¿½ï¿½ï¿½O(logn)
+	BiTree search(int key) {
+		BiTree res = searchDfs(tree, key);
+		if (res == nullptr) {
+			cout << "Ã»ï¿½Ð¶ï¿½Ó¦ï¿½Úµï¿½!" << endl;
+			return nullptr;
+		}
+		else return res;
+	}
+
+	BiTree searchDfs(BiTree& root, int key) {
+		if (root == nullptr) return nullptr;
+		if (key < root->data) return searchDfs(root->lchild, key);
+		else if(key > root->data) return searchDfs(root->rchild, key);
+		else return root;
+	}
+	
+	void preOrderTraverse() {  // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		recurDfsPre(tree);
+	}
+	void recurDfsPre(BiTree& tree) {
+		if (tree == nullptr) return;
+		cout << tree->data << endl;
+		recurDfsPre(tree->lchild);
+		recurDfsPre(tree->rchild);
+	}
+
+	void inOrderTraverse() {    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		recurDfsIn(tree);
+	}
+	void recurDfsIn(BiTree& tree) {
+		if (tree == nullptr) return;
+		recurDfsIn(tree->lchild);
+		cout << tree->data << endl;
+		recurDfsIn(tree->rchild);
+	}
+
+	void postOrderTraverse() {   // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		recurDfsPost(tree);
+	}
+	void recurDfsPost(BiTree& tree) {
+		if (tree == nullptr) return;
+		recurDfsPost(tree->lchild);
+		recurDfsPost(tree->rchild);
+		cout << tree->data << endl;
+	}
+
+	void levelTraverse() { // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		queue<BiTree> q;
+		q.push(tree);
+		while (!q.empty()) {
+			for (int i = 0; i < q.size(); ++i) {
+				BiTree tmp = q.front();
+				q.pop();
+				cout << tmp->data << endl;
+				if (tmp->lchild) q.push(tmp->lchild);
+				if (tmp->rchild) q.push(tmp->rchild);
+			}
+		}
+	}
+};
+
+int main() {
+	BST t;
+	t.insert(BiTreeNode(3));
+	t.insert(BiTreeNode(2));
+	t.insert(BiTreeNode(5));
+	t.insert(BiTreeNode(1));
+	t.erase(3);
+	t.levelTraverse();
+	cout << t.search(5)->data << endl;
+	return 0;
+}

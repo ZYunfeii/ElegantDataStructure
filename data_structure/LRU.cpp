@@ -16,8 +16,6 @@ public:
 	}
 };
 
-
-
 class DoubleLinkedList {
 public:
 	Node * head;
@@ -66,7 +64,7 @@ public:
 		Node * newNode = new Node(key, val);
 		if (map.find(key) != map.end()) {   // map中存在该key
 			cache->deleteNode(map[key]);
-			map[key] = newNode;             // 这里不能用insert
+			map[key] = newNode;             // 这里不能用insert insert如果存在key不会更新val
 			cache->addFirst(newNode);       // 保证新加入节点的最新性
 		}
 		else {                             // map中不存在该key
@@ -91,7 +89,8 @@ int main()
 {
 	LRUCache * lru = new LRUCache(2);
 	lru->put(2, 1);
-	lru->put(2, 2);
+	lru->put(3, 2);
+	lru->put(4, 4);
 	cout << lru->get(2) << endl;
 }
 

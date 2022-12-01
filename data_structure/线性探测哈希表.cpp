@@ -1,45 +1,45 @@
-//#include <iostream>
-//using namespace std;
-//
-//class HashTable {
-//private:
-//	static const int HASHSIZE = 12;
-//	static const int NULLKEY = -32768;
-//	int* elem;
-//public:
-//	HashTable() {
-//		elem = new int[HASHSIZE];
-//		for (int i = 0; i < HASHSIZE; ++i) {
-//			elem[i] = NULLKEY;
-//		}
-//	}
-//	int hash(int key) {
-//		return key % HASHSIZE;
-//	}
-//	void insertHash(int key) {
-//		int addr = hash(key);
-//		while (elem[addr] != NULLKEY) {
-//			addr = (addr + 1) % HASHSIZE;    // ¿ª·Å¶¨Ö··¨ÏßÐÔÌ½²â
-//		}
-//		elem[addr] = key;
-//	}
-//	int searchHash(int key) {
-//		int addr = hash(key);
-//		while (elem[addr] != key) {    // hash³åÍ»ÁË
-//			addr = (addr + 1) % HASHSIZE;
-//			if (elem[addr] == NULLKEY || addr == hash(key)) { // Èç¹ûÑ­»·Ò»È¦»òÕßÏÂÒ»¸öÌ½²âÎªnullÔòËÑË÷Ê§°Ü£¨ÔÚ²åÈëµÄÊ±ºò²»¿ÉÄÜÁôÓÐnull£©
-//				return NULLKEY;
-//			}
-//		}
-//		return elem[addr];
-//	}
-//};
-//
-//int main() {
-//	HashTable tab;
-//	tab.insertHash(14);
-//	tab.insertHash(3);
-//	tab.insertHash(2);
-//	cout << tab.searchHash(2) << endl;
-//	return 0;
-//}
+#include <iostream>
+using namespace std;
+
+class HashTable {
+private:
+	static const int HASHSIZE = 12;
+	static const int NULLKEY = -32768;
+	int* elem;
+public:
+	HashTable() {
+		elem = new int[HASHSIZE];
+		for (int i = 0; i < HASHSIZE; ++i) {
+			elem[i] = NULLKEY;
+		}
+	}
+	int hash(int key) {
+		return key % HASHSIZE;
+	}
+	void insertHash(int key) {
+		int addr = hash(key);
+		while (elem[addr] != NULLKEY) {
+			addr = (addr + 1) % HASHSIZE;    // ï¿½ï¿½ï¿½Å¶ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì½ï¿½ï¿½
+		}
+		elem[addr] = key;
+	}
+	int searchHash(int key) {
+		int addr = hash(key);
+		while (elem[addr] != key) {    // hashï¿½ï¿½Í»ï¿½ï¿½
+			addr = (addr + 1) % HASHSIZE;
+			if (elem[addr] == NULLKEY || addr == hash(key)) { // ï¿½ï¿½ï¿½Ñ­ï¿½ï¿½Ò»È¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Ì½ï¿½ï¿½Îªnullï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê§ï¿½Ü£ï¿½ï¿½Ú²ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ò²»¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½nullï¿½ï¿½
+				return NULLKEY;
+			}
+		}
+		return elem[addr];
+	}
+};
+
+int main() {
+	HashTable tab;
+	tab.insertHash(14);
+	tab.insertHash(3);
+	tab.insertHash(2);
+	cout << tab.searchHash(2) << endl;
+	return 0;
+}
