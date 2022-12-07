@@ -34,7 +34,7 @@ private:
 template <typename T, typename U>
 int HashTable<T, U>::hash(const T &key)
 {
-	return key % 13;
+	return key % hashsize;
 }
 
 //哈希查找
@@ -61,14 +61,8 @@ bool HashTable<T, U>::insert_data(const T &key, const U &value)
 	HashNode<T, U> node;
 	node._key = key;
 	node._value = value;
-	for (int i = 0; i < hashsize; ++i)
-	{
-		if (i == hash(key))//如果溢出则把相应的键值添加进链表
-		{
-			vec[i].push_back(node);
-			return true;
-		}
-	}
+	vec[hash(key)].push_back(node);
+	return true;
 }
 
 int main(int argc, char const *argv[])
