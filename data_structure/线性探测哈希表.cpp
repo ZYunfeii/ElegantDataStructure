@@ -47,5 +47,6 @@ int main() {
 	tab.insertHash(3, 4);
 	tab.insertHash(2, 7);
 	cout << tab.searchHash(3) << endl;
+	
 	return 0;
 }
