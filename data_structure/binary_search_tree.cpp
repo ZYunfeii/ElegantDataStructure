@@ -3,7 +3,7 @@
 #include <queue>
 using namespace std;
 
-// ����������ʵ��
+
 typedef struct node
 {
 	struct node *lchild;

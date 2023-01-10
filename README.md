@@ -1,5 +1,5 @@
 # ElegantDataStructure
- C++ implementation of data structure
+ C++ implementation of data structure and algorithms.
 
 ## Already implemented data structure
 
@@ -34,3 +34,9 @@
   - 堆排序
   - 计数排序
   - 基数排序
+- 字符串算法
+  - KMP算法
+
+## Already implemented wheels
+- 消息队列MQ
+- shared_ptr
