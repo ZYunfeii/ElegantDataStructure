@@ -17,6 +17,9 @@ public:
         count_--;
     }
     int find(int x) {
+        //                        0
+        // 0--6--2--1   --->     /|\ 
+        //                      6 2 1
         if (parent_[x] != x) { // mark: not while!
             parent_[x] = find(parent_[x]);
         }
