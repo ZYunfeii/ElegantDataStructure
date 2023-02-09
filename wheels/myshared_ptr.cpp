@@ -52,8 +52,9 @@ public:
     int* count_;
     T* data_;
     ~MySharedPtr() {
-        if (!--count_) {
+        if (!--(*count_)) {
             delete data_;
+            delete count_;
         }
     }
 };
