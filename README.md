@@ -26,6 +26,7 @@
   - 最小堆
 - 并查集
 - LRU Cache
+- LFU Cache
 
 ## Already implemented algorithms
 
