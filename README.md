@@ -46,3 +46,7 @@
 ## Already implemented wheels
 - 消息队列MQ
 - shared_ptr
+
+## IPC
+- pipe
+- shared memory
