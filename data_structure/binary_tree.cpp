@@ -1,87 +1,69 @@
-#include <iostream>
-#include <vector>
-#include <queue>
+#include<bits/stdc++.h>
 using namespace std;
 
-typedef struct node
-{
-	struct node *lchild;
-	struct node *rchild;
-	char data;
-}BiTreeNode, *BiTree;
+struct Node {
+    int val;
+    Node* left;
+    Node* right;
+};
 
-class Tree {
+class BTree {
 private:
-	BiTree tree;
+    Node* root;
 public:
-	void create() {
-		BiTree T = new BiTreeNode;
-		this->tree = createBiTree(T);
+    BTree(deque<string>& d) {
+        root = create(d);
+    }
+
+    Node* create(deque<string>& d) {
+        if (d.empty()) {
+            return nullptr;
+        }
+        string s = d.front();
+        d.pop_front();
+        if (s == "#") {
+            return nullptr;
+        }
+        int val = stoi(s);
+        Node* node = new Node{val};
+        node->left = create(d);
+        node->right = create(d);
+        return node;
+    }
+	void preOrder() {
+		Node* t = root;
+		pre(t);
 	}
-	BiTree createBiTree(BiTree& T) { // ע��ʹ�õ���ָ������� ���ֻ�Ǵ���ָ��ᱻ����
-		char c;
-		cin >> c;
-		if ('#' == c)
-			T = NULL;
-		else
-		{
-			cout << "����һ���ڵ�!" << endl;
-			T = new BiTreeNode;
-			T->data = c;
-			createBiTree(T->lchild);
-			createBiTree(T->rchild);
+	void pre(Node* root) {
+		if (root == nullptr) {
+			return;
 		}
-		return T;
+		cout << root->val << endl;
+		pre(root->left);
+		pre(root->right);
 	}
-	void preOrderTraverse() {  // �������
-		recurDfsPre(tree);
-	}
-	void recurDfsPre(BiTree& tree) {
-		if (tree == nullptr) return;
-		cout << tree->data << endl;
-		recurDfsPre(tree->lchild);
-		recurDfsPre(tree->rchild);
-	}
-
-	void inOrderTraverse() {    // �������
-		recurDfsIn(tree);
-	}
-	void recurDfsIn(BiTree& tree) {
-		if (tree == nullptr) return;
-		recurDfsIn(tree->lchild);
-		cout << tree->data << endl;
-		recurDfsIn(tree->rchild);
-	}
-
-	void postOrderTraverse() {   // �������
-		recurDfsPost(tree);
-	}
-	void recurDfsPost(BiTree& tree) {
-		if (tree == nullptr) return;
-		recurDfsPost(tree->lchild);
-		recurDfsPost(tree->rchild);
-		cout << tree->data << endl;
-	}
-
-	void levelTraverse() { // �������
-		queue<BiTree> q;
-		q.push(tree);
+	void levelTraversal() {
+		queue<Node*> q;
+		q.push(root);
 		while (!q.empty()) {
-			for (int i = 0; i < q.size(); ++i) {
-				BiTree tmp = q.front();
+			int sz = q.size();
+			for (int i = 0; i < sz; ++i) {
+				Node* t = q.front();
 				q.pop();
-				cout << tmp->data << endl;
-				if(tmp->lchild) q.push(tmp->lchild);
-				if(tmp->rchild) q.push(tmp->rchild);
+				cout << t->val << endl;
+				if (t->left) q.push(t->left);
+				if (t->right) q.push(t->right);
 			}
 		}
 	}
 };
 
-int main() {
-	Tree t;
-	t.create();
-	t.preOrderTraverse();
-	t.levelTraverse();
-	return 0;
+
+
+int main(int argc, char** argv) {
+    deque<string> d = {"3", "#", "2", "1", "#", "#", "4", "#", "#"}; // 根据中序遍历结果构造树（这里必须有null的标记）
+    BTree b(d);
+	b.preOrder();
+	b.levelTraversal();
+    return 0;
 }
