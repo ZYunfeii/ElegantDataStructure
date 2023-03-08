@@ -47,26 +47,30 @@ private:
 };
 
 int main() {
-    queue q;
-    q.push(1);
-    q.push(2);
-    q.push(3);
-    q.push(4);
-    q.push(5);
-    q.push(6);
-    fprintf(stdout, "whether queue is empty:%d\n", q.empty());
-    fprintf(stdout, "queue front: %d\n", q.front());
-    q.pop();
-    fprintf(stdout, "queue front: %d\n", q.front());
-    q.pop();
-    fprintf(stdout, "queue front: %d\n", q.front());
-    q.pop();
-    fprintf(stdout, "queue front: %d\n", q.front());
-    q.pop();
-    fprintf(stdout, "queue front: %d\n", q.front());
-    q.pop();
-    fprintf(stdout, "queue front: %d\n", q.front());
-    q.pop();
-    fprintf(stdout, "whether queue is empty:%d\n", q.empty());
+    try {
+        queue q;
+        q.push(1);
+        q.push(2);
+        q.push(3);
+        q.push(4);
+        q.push(5);
+        q.push(6);
+        fprintf(stdout, "whether queue is empty:%d\n", q.empty());
+        fprintf(stdout, "queue front: %d\n", q.front());
+        q.pop();
+        fprintf(stdout, "queue front: %d\n", q.front());
+        q.pop();
+        fprintf(stdout, "queue front: %d\n", q.front());
+        q.pop();
+        fprintf(stdout, "queue front: %d\n", q.front());
+        q.pop();
+        fprintf(stdout, "queue front: %d\n", q.front());
+        q.pop();
+        fprintf(stdout, "queue front: %d\n", q.front());
+        q.pop();
+        fprintf(stdout, "whether queue is empty:%d\n", q.empty());
+    } catch (std::range_error& e) {
+        fprintf(stdout, "error:%s\n", e.what());
+    }
     return 0;
 }

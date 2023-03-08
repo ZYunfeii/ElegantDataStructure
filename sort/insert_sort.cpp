@@ -2,23 +2,23 @@
 
 using namespace std;
 
-void insert_sort(int A[], int N) {
-	int tmp; 
-	int j;
-	for (int i = 1; i < N; ++i) {
-		if (A[i] < A[i - 1]) {
-			tmp = A[i];
-			for (j = i - 1; A[j] > tmp && j >= 0; --j) { 
-			}
-			A[j + 1] = tmp;
-		}
-	}
+void insertionSort(int arr[], int n) {
+    int i, j, key;
+    for (i = 1; i < n; i++) {
+        key = arr[i];
+        j = i - 1;
+        while (j >= 0 && arr[j] > key) {
+            arr[j + 1] = arr[j];
+            j = j - 1;
+        }
+        arr[j + 1] = key;
+    }
 }
 
 int main(int argc, char** argv) {
 	int A[] = { 5,4,3,6, 7, 1};
 	int N = sizeof(A) / sizeof(A[0]);
-	insert_sort(A, N);
+	insertionSort(A, N);
 	for (int i = 0; i < N; ++i) {
 		cout << A[i] << " ";
 	}
