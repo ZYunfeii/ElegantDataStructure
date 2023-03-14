@@ -43,7 +43,7 @@
   - 基数排序
 - 字符串算法
   - KMP算法
-
+- Dijkstra
 ## Already implemented wheels
 - 消息队列MQ
 - shared_ptr
@@ -51,3 +51,6 @@
 ## IPC
 - pipe
 - shared memory
+
+## Thread Pool
+- 线程池
