@@ -43,10 +43,24 @@
   - 基数排序
 - 字符串算法
   - KMP算法
-- Dijkstra
+- 图论
+  - Dijkstra
+  - Floyd
+- 快速幂
+- 大数运算
+  - 大数加法
+  - 大数乘法
+  - 大数减法
+- 中文转阿拉伯数字
+- 阿拉伯数字转中文
 ## Already implemented wheels
 - 消息队列MQ
 - shared_ptr
+- unique_ptr
+- unique_lock
+- read write lock
+- reentrant lock
+- spin lock(test and set)
 
 ## IPC
 - pipe
