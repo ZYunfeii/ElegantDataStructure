@@ -1,6 +1,6 @@
 #include <iostream>
 using namespace std;
-
+// 从小到大
 int get_por(int arr[], int low, int high) { // 这个函数不仅获得了中枢轴，还带部分有序（中枢轴左侧小于中枢轴，右侧大于）
 	// 中枢轴的值默认为arr的第一个元素
     int por = arr[low];
@@ -12,6 +12,18 @@ int get_por(int arr[], int low, int high) { // 这个函数不仅获得了中枢
 	}
 	return low;
 }
+// 从大到小
+// int get_por(int arr[], int low, int high) { // 这个函数不仅获得了中枢轴，还带部分有序（中枢轴左侧小于中枢轴，右侧大于）
+// 	// 中枢轴的值默认为arr的第一个元素
+//     int por = arr[low];
+// 	while (low < high) {
+// 		while (low < high && arr[high] <= por) high--;
+// 		swap(arr[low], arr[high]);
+// 		while (low < high && arr[low] >= por) low++;
+// 		swap(arr[low], arr[high]);
+// 	}
+// 	return low;
+// }
 
 void sort(int arr[], int low, int high) {
 	if (low < high) {

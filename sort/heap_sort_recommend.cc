@@ -20,7 +20,7 @@ void heap_adjust(int arr[], int i, int N) {
 }
 
 void heap_sort(int arr[], int N) {
-    for (int i = N / 2; i >= 0; --i) {
+    for (int i = N / 2 - 1; i >= 0; --i) {
         heap_adjust(arr, i, N);
     }
     for (int i = N - 1; i >= 0; --i) {
@@ -31,7 +31,7 @@ void heap_sort(int arr[], int N) {
 }
 
 int main() {
-	int arr[] = { 3, 7, 2, 1, 5, 5, 4, 6 };
+	int arr[] = { 3, 2, 1 };
 	heap_sort(arr, sizeof arr / sizeof arr[0]);
 	for (int i = 0; i < sizeof arr / sizeof arr[0]; ++i) {
 		cout << arr[i] << endl;

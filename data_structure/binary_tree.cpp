@@ -113,7 +113,7 @@ public:
 
 
 int main(int argc, char** argv) {
-    deque<string> d = {"3", "#", "2", "1", "#", "#", "4", "#", "#"}; // 根据中序遍历结果构造树（这里必须有null的标记）
+    deque<string> d = {"3", "#", "2", "1", "#", "#", "4", "#", "#"}; // 根据先序遍历结果构造树（这里必须有null的标记）
     BTree b(d);
 	b.preOrderRecur();
 	cout << " ---------- " << endl;

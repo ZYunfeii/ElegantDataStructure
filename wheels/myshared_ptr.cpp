@@ -1,5 +1,5 @@
 #include <iostream>
-
+#include <atomic>
 typedef struct {
     int data_;
 } Data;
@@ -9,9 +9,9 @@ class MySharedPtr {
 public:
     MySharedPtr(T* d) : data_(d) {
         if (d) {
-            count_ = new int(1);
+            count_ = new std::atomic_uint(1);
         } else {
-            count_ = new int(0);
+            count_ = new std::atomic_uint(0);
         }
     }
     MySharedPtr(MySharedPtr& rhs) {
@@ -20,6 +20,12 @@ public:
             count_ = rhs.count_;
             ++(*count_);
         }
+    }
+    MySharedPtr(MySharedPtr&& rhs) {
+        data_ = rhs.data_;
+        count_ = rhs.count_;
+        rhs.data_ = nullptr;
+        rhs.count_ = nullptr;
     }
     MySharedPtr& operator=(MySharedPtr& rhs) {
         if (rhs.data_ == this->data_) return *this;
@@ -48,8 +54,7 @@ public:
     int useCount() {
         return *count_;
     }
-
-    int* count_;
+    std::atomic_uint* count_;
     T* data_;
     ~MySharedPtr() {
         if (!--(*count_)) {
