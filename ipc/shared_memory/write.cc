@@ -1,6 +1,5 @@
 #include <unistd.h>
 #include <sys/ipc.h>
-#include <sys/ipc.h>
 #include <sys/shm.h>
 #include <iostream>
 #include <string.h>
