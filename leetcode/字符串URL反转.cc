@@ -7,11 +7,11 @@ string solver(string s) {
     string res;
     for (int i = 0; i < s.size(); ++i) {
         if (s[i] != '.') {
-            s += s[i];
+            t += s[i];
             continue;
         }
         reverse(t.begin(), t.end());
-        res += t;
+        res += t + ".";
         t.clear();
     }
     reverse(t.begin(), t.end());
